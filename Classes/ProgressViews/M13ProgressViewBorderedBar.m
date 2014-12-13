@@ -110,6 +110,8 @@
     _indeterminateLayer.opacity = 0;
     [_progressSuperLayer addSublayer:_indeterminateLayer];
     
+    _withGap = YES;
+    
     //Layout
     [self layoutSubviews];
 }
@@ -398,22 +400,22 @@
         cornerRadius = _cornerRadius;
     } else if (_cornerType == M13ProgressViewBorderedBarCornerTypeCircle) {
         if (_progressDirection == M13ProgressViewBorderedBarProgressDirectionLeftToRight || _progressDirection == M13ProgressViewBorderedBarProgressDirectionRightToLeft) {
-            cornerRadius = self.bounds.size.height - (2 * _borderWidth);
+            cornerRadius = self.bounds.size.height - (self.withGap ? 2 * _borderWidth : _borderWidth);
         } else {
-            cornerRadius = self.bounds.size.width - (2 * _borderWidth);
+            cornerRadius = self.bounds.size.width - (self.withGap ? 2 * _borderWidth : _borderWidth);
         }
     }
     
     //Draw the path
     CGRect rect = CGRectZero;
     if (_progressDirection == M13ProgressViewBorderedBarProgressDirectionLeftToRight) {
-        rect = CGRectMake(_borderWidth * 2, _borderWidth * 2, (self.bounds.size.width - (4 * _borderWidth)) * self.progress, self.bounds.size.height - (4 * _borderWidth));
+        rect = CGRectMake(self.withGap ? 2 * _borderWidth : _borderWidth, self.withGap ? 2 * _borderWidth : _borderWidth, (self.bounds.size.width - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth)) * self.progress, self.bounds.size.height - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth));
     } else if (_progressDirection == M13ProgressViewBorderedBarProgressDirectionRightToLeft) {
-        rect = CGRectMake((_borderWidth * 2) + ((self.bounds.size.width - (4 * _borderWidth)) * (1 - self.progress)), _borderWidth * 2, (self.bounds.size.width - (4 * _borderWidth)) * self.progress, self.bounds.size.height - (4 * _borderWidth));
+        rect = CGRectMake((self.withGap ? 2 * _borderWidth : _borderWidth) + ((self.bounds.size.width - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth)) * (1 - self.progress)), self.withGap ? 2 * _borderWidth : _borderWidth, (self.bounds.size.width - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth)) * self.progress, self.bounds.size.height - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth));
     } else if (_progressDirection == M13ProgressViewBorderedBarProgressDirectionBottomToTop) {
-        rect = CGRectMake(_borderWidth * 2, ((self.bounds.size.height - (4 * _borderWidth)) * (1 - self.progress)) + (2 * _borderWidth), self.bounds.size.width - (4 * _borderWidth), (self.bounds.size.height - (4 * _borderWidth)) * self.progress);
+        rect = CGRectMake(self.withGap ? 2 * _borderWidth : _borderWidth, ((self.bounds.size.height - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth)) * (1 - self.progress)) + (self.withGap ? 2 * _borderWidth : _borderWidth), self.bounds.size.width - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth), (self.bounds.size.height - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth)) * self.progress);
     } else if (_progressDirection == M13ProgressViewBorderedBarProgressDirectionTopToBottom) {
-        rect = CGRectMake(_borderWidth * 2, _borderWidth * 2, self.bounds.size.width - (4 * _borderWidth), (self.bounds.size.height - (4 * _borderWidth)) * self.progress);
+        rect = CGRectMake(self.withGap ? 2 * _borderWidth : _borderWidth, self.withGap ? 2 * _borderWidth : _borderWidth, self.bounds.size.width - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth), (self.bounds.size.height - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth)) * self.progress);
     }
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
     [_progressLayer setPath:path.CGPath];
@@ -427,14 +429,14 @@
         cornerRadius = _cornerRadius;
     } else if (_cornerType == M13ProgressViewBorderedBarCornerTypeCircle) {
         if (_progressDirection == M13ProgressViewBorderedBarProgressDirectionLeftToRight || _progressDirection == M13ProgressViewBorderedBarProgressDirectionRightToLeft) {
-            cornerRadius = self.bounds.size.height - (2 * _borderWidth);
+            cornerRadius = self.bounds.size.height - (self.withGap ? 2 * _borderWidth : _borderWidth);
         } else {
-            cornerRadius = self.bounds.size.width - (2 * _borderWidth);
+            cornerRadius = self.bounds.size.width - (self.withGap ? 2 * _borderWidth : _borderWidth);
         }
     }
     
     //Draw the path
-    CGRect rect = CGRectMake(_borderWidth * 2, _borderWidth * 2, self.bounds.size.width - (4 * _borderWidth), self.bounds.size.height - (4 * _borderWidth));
+    CGRect rect = CGRectMake(self.withGap ? 2 * _borderWidth : _borderWidth, self.withGap ? 2 * _borderWidth : _borderWidth, self.bounds.size.width - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth), self.bounds.size.height - (self.withGap ? 4 * _borderWidth : 2 * _borderWidth));
 
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
     
