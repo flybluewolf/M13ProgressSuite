@@ -44,4 +44,6 @@ typedef enum {
 /**The color the bar changes to for the failure action.*/
 @property (nonatomic, retain) UIColor *failureColor;
 
+@property (nonatomic, assign) BOOL withGap;
+
 @end
