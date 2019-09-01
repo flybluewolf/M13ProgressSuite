@@ -126,7 +126,7 @@
     [self layoutSubviews];
     
     //Start stripes animation
-    [self setAnimateStripes:YES];
+    [self setAnimateStripes:NO];
 }
 
 #pragma mark Appearance
@@ -196,8 +196,8 @@
         //Add the animation
         //Create the animation
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-        animation.duration = 2 * self.animationDuration;
-        animation.repeatCount = HUGE_VALF;
+        animation.duration = 0;
+        animation.repeatCount = 0;
         animation.removedOnCompletion = YES;
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(- (2 *_stripeWidth) + (self.bounds.size.width / 2), self.bounds.size.height / 2.0)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(0 + (self.bounds.size.width / 2.0), self.bounds.size.height / 2.0)];
